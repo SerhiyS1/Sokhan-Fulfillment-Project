@@ -1,0 +1,28 @@
+---
+title: "Sokhan-Fulfillment-Project"
+author: "Serhiy Sokhan"
+date: "10/19/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(knitr)
+library(dplyr)
+```
+
+Below are three different .csv files I am considering using for my final project.  This past year, I have worked for The Harvard Shop as the Web Fulfillment Manager, which essentially means that my team of employees and I are responsible for getting every online order shipped out and dealing with customer service.  We use the e-commerce platform Shopify, which allows you to export data with selected variables.  I want to analyze my job over the past 12 months, and the datasets below are all data to analyze the performance of The Harvard Shop's online store over the time period November 1, 2018, to the present day.  The reason I have three different .csv files is because I am not yet certain which dataset will be the most useful for analysis.  The first dataset separates orders by the day, giving me information on every single day since my start date, and thus has 352 observations, as the count() function shows us.  THe second dataset separates orders by the day, and thus only gives me 12 observations.  I know that it makes a lot of sense to divide by the month; it will allow me to communicate my findings to the next managers and tell them how to prepare for certain months.  Unfortunately, I do not know if 12 observations is enough.  Fortunately, my third dataset is separated by month and region (country or state) and has 939 observations.  After some further reflection, I think it's best if I leave all three .csv files in my repo and communicate with the teaching staff to see what the best way to proceed is.  
+```{r, echo = FALSE, message = FALSE}
+
+daily <- read_csv("Sales-11-01-17-to-10-18-18-daily.csv") 
+
+monthly <- read_csv("Sales-11-01-17-to-10-18-18-monthly.csv") 
+
+monthandregion <- read_csv("Sales-11-01-17-to-10-18-18-month-region.csv") 
+
+count(daily)
+count(monthly)
+count(monthandregion)
+
+```
