@@ -21,8 +21,12 @@ monthly <- read_csv("Sales-11-01-17-to-10-18-18-monthly.csv")
 
 monthandregion <- read_csv("Sales-11-01-17-to-10-18-18-month-region.csv") 
 
+
+monthandcountry <- read_csv("Sales-11-01-17-to-10-18-18-country-month.csv")
+
 count(daily)
 count(monthly)
 count(monthandregion)
+count
 
 ```
