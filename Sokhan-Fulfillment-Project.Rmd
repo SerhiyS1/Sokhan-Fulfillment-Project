@@ -24,9 +24,27 @@ monthandregion <- read_csv("Sales-11-01-17-to-10-18-18-month-region.csv")
 
 monthandcountry <- read_csv("Sales-11-01-17-to-10-18-18-country-month.csv")
 
-count(daily)
-count(monthly)
-count(monthandregion)
-count
+xy <- monthandcountry %>%
+  mutate(num_orders = as.numeric(orders)) %>%
+  filter(billing_country == "United States") %>%
+  select(month, billing_country, orders, num_orders, average_order_value) 
+  
+
+ggplot(data = xy, aes(x = month, y = num_orders)) + stat_summary(geom = "bar")
+
+fulfillment_data <- monthandcountry
+
+write_rds(fulfillment_data, "Sokhan-Fulfillment-Project/fulfillment_data.rds")
+
+
 
 ```
+big shoutout https://stackoverflow.com/questions/11857935/plotting-the-average-values-for-each-level-in-ggplot2
+
+used to write out every country until I got choices from https://stackoverflow.com/questions/42957746/shiny-create-reactive-filter-using-different-variables
+
+link to shinythemes package
+https://rstudio.github.io/shinythemes/
+
+link to thing helping me w one inputID
+https://stackoverflow.com/questions/50852305/one-reactive-function-to-be-displayed-on-two-different-pages-interactively
