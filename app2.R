@@ -20,7 +20,7 @@ ui <- fluidPage(theme = shinytheme("darkly"),
    # Application title
    navbarPage("The Harvard Shop Web Fulfillment Data, 11/17 - 10/18",
    
-   tabPanel("OrdersPerMonthByCountry", 
+   tabPanel("Orders Per Month By Country", 
    
    # Sidebar with a slider input for number of bins 
    sidebarLayout(
@@ -38,7 +38,7 @@ ui <- fluidPage(theme = shinytheme("darkly"),
    )
 ),
 
-    tabPanel("AvgOrderValuePerMonthByCountry", 
+    tabPanel("Avg. Order Value Per Month By Country", 
          
            # Show a plot of the generated distribution
            mainPanel(
@@ -50,13 +50,13 @@ ui <- fluidPage(theme = shinytheme("darkly"),
 server <- function(input, output, session) {
 
   observe({
-    x <- input$OrdersPerMonthByCountry
-    updateSelectInput(session, "AvgOrderValuePerMonthByCountry", selected = x)
+    x <- input$`Orders Per Month By Country`
+    updateSelectInput(session, "Avg. Order Value Per Month By Country", selected = x)
   })
   
   observe({
-    y <- input$AvgOrderValuePerMonthByCountry
-    updateSelectInput(session, "OrdersPerMonthByCountry", selected = y)
+    y <- input$`Avg. Order Value Per Month By Country`
+    updateSelectInput(session, "Orders Per Month By Country", selected = y)
   })
   
    dataInput <- reactive({ 
