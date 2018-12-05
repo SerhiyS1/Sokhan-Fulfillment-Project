@@ -19,7 +19,36 @@ ui <- fluidPage(theme = shinytheme("darkly"),
    
    # Application title
    navbarPage("The Harvard Shop Web Fulfillment Data, 11/17 - 10/18",
-   
+    
+   tabPanel("Introduction",
+            h3("What is Web Fulfillment?"),
+            h5("People buy a LOT of Harvard apparel.  When an order is placed on a site like theharvardshop.com,
+                it is up to the Web Fullfillment team to fulfill online orders.  Why is this relevant?  Well, 
+                for the past year, I have been the Web Fulfillment Manager of The Harvard Shop.  With a team of 
+                15-20 employees, I was responsible for the packaging, shipping, and customer service of over 
+                12,000 orders.  These 12,000 orders were shipped to countries all around the world."),
+            h3("What Is the Signifigance of This Analysis?"),
+            h5("The analysis presented in this project serves two main purposes.  The first is to allow those
+               that are interested to explore the amount of orders and average order value per month for 
+               different countries.  The second is to provide my successor with an app that can give him
+               insights into which periods of the year are busier and which periods have higher average
+               basket values.  As the manager, it is crucial to schedule employees well enough to maintain
+               budget while also sticking to our policy of shipping orders out within one business day.
+               In addition, it is also important to order enough shipping supplies for the month, and the 
+               quantities and types of supplies needed depend on the amount of orders and the size of the
+               average order."),
+            h3("Data"),
+            h5("The Harvard Shop uses the e-commerce platform Shopify.  Shopify is an avid supporter of using 
+              data frequently to allow retailers of all sizes to identify trends and make data-driven 
+              decisions.  As such, the platform does a fantastic job of providing clean data that can be 
+              exported easily.  I purposely exported and used data that does not reveal any information about
+              unique orders or any customer information.  The dataset is in my GitHub repository, linked
+              below."),
+            h3("GitHub Repository Link"),
+            h5("To access my code and data, visit https://github.com/SerhiyS1/Sokhan-Fulfillment-Project")
+            ),          
+              
+                        
    tabPanel("Orders Per Month By Country", 
    
    # Sidebar with a slider input for number of bins 
