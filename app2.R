@@ -16,12 +16,12 @@ data <- read_rds("fulfillment_data.rds")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(theme = shinytheme("darkly"),
-   
+          
    # Application title
    navbarPage("The Harvard Shop Web Fulfillment Data, 11/17 - 10/18",
     
    tabPanel("Introduction",
-            h3("What is Web Fulfillment?"),
+            h3("What Is Web Fulfillment?"),
             h5("People buy a LOT of Harvard apparel.  When an order is placed on a site like theharvardshop.com,
                 it is up to the Web Fullfillment team to fulfill online orders.  Why is this relevant?  Well, 
                 for the past year, I have been the Web Fulfillment Manager of The Harvard Shop.  With a team of 
@@ -45,7 +45,8 @@ ui <- fluidPage(theme = shinytheme("darkly"),
               unique orders or any customer information.  The dataset is in my GitHub repository, linked
               below."),
             h3("GitHub Repository Link"),
-            h5("To access my code and data, visit https://github.com/SerhiyS1/Sokhan-Fulfillment-Project")
+            h5("To access my code and data,"),
+            tags$a(href="https://github.com/SerhiyS1/Sokhan-Fulfillment-Project", "Click here!")
             ),          
               
                         
@@ -57,7 +58,9 @@ ui <- fluidPage(theme = shinytheme("darkly"),
          selectInput(inputId = "billing_country",
                      label = "Country:",
                      choices = unique(data$billing_country),
-                     selected = "United States")
+                     selected = "United States"),
+         tags$h6("Above, select a country to see the number of orders per month in it."),
+         tags$h5("Key")
       ),
       
       # Show a plot of the generated distribution
@@ -68,11 +71,12 @@ ui <- fluidPage(theme = shinytheme("darkly"),
 ),
 
     tabPanel("Avg. Order Value Per Month By Country", 
-         
+
            # Show a plot of the generated distribution
            mainPanel(
-             plotOutput("distPlot2")
-
+             plotOutput("distPlot2"),
+             
+        tags$h6("does this work")
 ))))
 
 # Define server logic required to draw a histogram

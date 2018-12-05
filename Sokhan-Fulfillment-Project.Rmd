@@ -48,3 +48,6 @@ https://rstudio.github.io/shinythemes/
 
 link to thing helping me w one inputID
 https://stackoverflow.com/questions/50852305/one-reactive-function-to-be-displayed-on-two-different-pages-interactively
+
+link to hyperlink to github
+https://shiny.rstudio.com/articles/tag-glossary.html
