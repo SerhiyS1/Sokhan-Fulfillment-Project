@@ -11,18 +11,19 @@ library(shiny)
 library(tidyverse)
 library(ggplot2)
 library(shinythemes)
+library(scales)
 
 data <- read_rds("fulfillment_data.rds")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(theme = shinytheme("darkly"),
-          
+
    # Application title
    navbarPage("The Harvard Shop Web Fulfillment Data, 11/17 - 10/18",
     
    tabPanel("Introduction",
             h3("What Is Web Fulfillment?"),
-            h5("People buy a LOT of Harvard apparel.  When an order is placed on a site like theharvardshop.com,
+            h5("People buy a LOT of Harvard apparel.  When an order is placed on theharvardshop.com,
                 it is up to the Web Fullfillment team to fulfill online orders.  Why is this relevant?  Well, 
                 for the past year, I have been the Web Fulfillment Manager of The Harvard Shop.  With a team of 
                 15-20 employees, I was responsible for the packaging, shipping, and customer service of over 
@@ -34,15 +35,15 @@ ui <- fluidPage(theme = shinytheme("darkly"),
                insights into which periods of the year are busier and which periods have higher average
                basket values.  As the manager, it is crucial to schedule employees well enough to maintain
                budget while also sticking to our policy of shipping orders out within one business day.
-               In addition, it is also important to order enough shipping supplies for the month, and the 
+               In addition, it is important to order enough shipping supplies for the month. The 
                quantities and types of supplies needed depend on the amount of orders and the size of the
                average order."),
             h3("Data"),
             h5("The Harvard Shop uses the e-commerce platform Shopify.  Shopify is an avid supporter of using 
-              data frequently to allow retailers of all sizes to identify trends and make data-driven 
+              data in business frequently to allow retailers to identify trends and make data-driven 
               decisions.  As such, the platform does a fantastic job of providing clean data that can be 
               exported easily.  I purposely exported and used data that does not reveal any information about
-              unique orders or any customer information.  The dataset is in my GitHub repository, linked
+              unique orders or customers.  The dataset is in my GitHub repository, linked
               below."),
             h3("GitHub Repository Link"),
             h5("To access my code and data,"),
@@ -59,8 +60,14 @@ ui <- fluidPage(theme = shinytheme("darkly"),
                      label = "Country:",
                      choices = unique(data$billing_country),
                      selected = "United States"),
-         tags$h6("Above, select a country to see the number of orders per month in it."),
-         tags$h5("Key")
+         tags$h6("Above, select a country to see the number of orders per month in it. The
+                 average order value per month in this country is in the next tab."),
+         tags$h4("Legend"),
+         tags$b("X-Axis:"),
+         tags$h6("The X-Axis is the month of web fulfillment in YYYY-MM format.  It starts with
+                 November 2017, when I first took over as the manager."),
+         tags$b("Y-Axis:"),
+         tags$h6("The Y-Axis is the number of orders.")
       ),
       
       # Show a plot of the generated distribution
@@ -76,8 +83,31 @@ ui <- fluidPage(theme = shinytheme("darkly"),
            mainPanel(
              plotOutput("distPlot2"),
              
-        tags$h6("does this work")
-))))
+             tags$h6("Above are the average order values per month for the country selected in the 
+                     previous tab."),
+             tags$h6("Note: The subtitle of the bar graph is the country selected in the previous tab."),
+             tags$h4("Legend"),
+             tags$b("X-Axis:"),
+             tags$h6("The X-Axis is the month of web fulfillment in YYYY-MM format.  It starts with
+                     November 2017, when I first took over as the manager."),
+             tags$b("Y-Axis:"),
+             tags$h6("The Y-Axis is the average order value, in U.S. Dollars."))),
+             
+    tabPanel("Plot",
+             
+             mainPanel(
+               plotOutput("plots"),
+               
+               tags$h6("Above are the total sales per month for all countries."),
+               tags$h6("Note: The subtitle of the bar graph is the country selected in the previous tab."),
+               tags$h4("Legend"),
+               tags$b("X-Axis:"),
+               tags$h6("The X-Axis is the month of web fulfillment in YYYY-MM format.  It starts with
+                       November 2017, when I first took over as the manager."),
+               tags$b("Y-Axis:"),
+               tags$h6("The Y-Axis is the total sales for all countries, in U.S. Dollars.")))
+   
+))
 
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
@@ -129,10 +159,19 @@ server <- function(input, output, session) {
         ggplot(data = final_data2, aes(x = month, y = average_order_value)) +
           geom_bar(stat = "identity", na.rm = FALSE) + 
           labs(x = "Month",
-               y = "Average Order Value",
-               title = "Avg. Order Value Per Month By Country",
+               y = "Average Order Value ($)",
+               title = "Average Order Value Per Month By Country",
                subtitle = print(final_data2$billing_country))
+        
    })
+      output$plots <- renderPlot({
+        ggplot(data = data, aes(x = month, y = total_sales)) +
+          geom_bar(stat = "identity", na.rm = FALSE) + 
+          scale_y_continuous(labels = comma) +
+          labs(x = "Month",
+               y = "Total Sales ($)",
+               title = "Total Sales Per Month")
+      })
 }
 
 
