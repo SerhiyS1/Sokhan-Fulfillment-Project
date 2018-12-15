@@ -31,9 +31,3 @@ write_rds(fulfillment_data, "Sokhan-Fulfillment-Project/fulfillment_data.rds")
 
 
 ```
-big shoutout https://stackoverflow.com/questions/11857935/plotting-the-average-values-for-each-level-in-ggplot2
-
-
-
-comma separation
-https://stackoverflow.com/questions/32427639/include-a-comma-separator-for-data-labels

@@ -114,7 +114,7 @@ ui <- fluidPage(theme = shinytheme("darkly"),
              h6("The X-Axis is the month of web fulfillment in YYYY-MM format.  It starts with
                      November 2017, when I first took over as the manager."),
              tags$b("Y-Axis:"),
-             h6("The Y-Axis is the average order value, in U.S. Dollars."))),
+             h6("The Y-Axis is the average order value in U.S. Dollars."))),
     
     # Below, I created my fourth tab, which is a plot of the total sales per month for all countries.  Although
     # this is not interactive, it still has two main purposes: 1) to allow those interested to see the total 
@@ -134,7 +134,7 @@ ui <- fluidPage(theme = shinytheme("darkly"),
                h6("The X-Axis is the month of web fulfillment in YYYY-MM format.  It starts with
                        November 2017, when I first took over as the manager."),
                tags$b("Y-Axis:"),
-               h6("The Y-Axis is the total sales for all countries, in U.S. Dollars.")))
+               h6("The Y-Axis is the total sales for all countries in U.S. Dollars.")))
    
 ))
 
@@ -187,21 +187,26 @@ server <- function(input, output, session) {
              title = "Orders Per Month by Country",
              subtitle = print(final_data$billing_country)) 
    })
-      
    
-   
+# Below, I repeated the steps from a few lines above.  I filtered the billing country to be the the billing 
+# country selected in the input.  I then made a variable that gives me the number of orders.
+    
       dataInput2 <- reactive({ 
         data %>%
           filter(billing_country == input$billing_country) %>%
           mutate(num_orders = as.numeric(orders))
       })
       
-      
+# Below, I created the output for my second bar plot, which is in the second tab.         
       output$distPlot2 <- renderPlot({
 
-        
+#I took the dataInput2 variable, which I created a few lines above this, and named it final_data2 for simplicity.
         final_data2 <- dataInput2()
-        
+
+# Once again, I used ggplot().  This time, the change was that the Y-axis is the average order value.  It was
+# more important to print() the country in the subtitle in this chart because I do not have a sidebar on this
+# tab in which the user can select the country, so the subtitle is the best way to see which country the bar
+# plot is for.  
         ggplot(data = final_data2, aes(x = month, y = average_order_value)) +
           geom_bar(stat = "identity", na.rm = FALSE) + 
           labs(x = "Month",
@@ -210,9 +215,15 @@ server <- function(input, output, session) {
                subtitle = print(final_data2$billing_country))
         
    })
+      
+#In the code below, I created the bar plot for my Total Sales tab.  Once again, I used ggplot().
       output$plots <- renderPlot({
         ggplot(data = data, aes(x = month, y = total_sales)) +
           geom_bar(stat = "identity", na.rm = FALSE) + 
+# Since the total sales per month were always in thousands, I wanted to separate the numeric values by commmas
+# to make the figures easily readable to my audience.  I used scale_y_continuous() from the scales package and
+# made labels equal to comma.  I got this information from the following link:
+# https://stackoverflow.com/questions/32427639/include-a-comma-separator-for-data-labels
           scale_y_continuous(labels = comma) +
           labs(x = "Month",
                y = "Total Sales ($)",
