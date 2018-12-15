@@ -27,7 +27,7 @@ fulfillment_data <- monthandcountry
 
 write_rds(fulfillment_data, "Sokhan-Fulfillment-Project/fulfillment_data.rds")
 
-#Above, I read in the .csv file from the Shopify export as monthandcountry.  Then, I named that fulfillment_data, and used write_rds for use in my Shiny App.
+#Above, I read in the .csv file from the Shopify export.  Then, I named that fulfillment_data, and used write_rds for use in my Shiny App.
 
 
 ```

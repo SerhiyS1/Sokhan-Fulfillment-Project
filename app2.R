@@ -232,6 +232,6 @@ server <- function(input, output, session) {
 }
 
 
-# Run the application 
+# Finally, this last line lets us run the application 
 shinyApp(ui = ui, server = server)
 
