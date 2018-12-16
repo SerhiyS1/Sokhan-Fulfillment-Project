@@ -2,15 +2,13 @@
 title: "Sokhan-Fulfillment-Project"
 author: "Serhiy Sokhan"
 date: "10/19/2018"
-output: html_documents
+output: html_document
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
-library(knitr)
-library(dplyr)
 
 #Loading in my libraries.
 ```
@@ -27,7 +25,7 @@ fulfillment_data <- monthandcountry
 
 write_rds(fulfillment_data, "Sokhan-Fulfillment-Project/fulfillment_data.rds")
 
-#Above, I read in the .csv file from the Shopify export.  Then, I named that fulfillment_data, and used write_rds for use in my Shiny App.
 
+#Above, I read in the .csv file from the Shopify export.  Then, I named that fulfillment_data, and used write_rds for use in my Shiny App.
 
 ```
