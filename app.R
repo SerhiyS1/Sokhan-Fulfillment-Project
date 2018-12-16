@@ -13,7 +13,7 @@ data <- read_rds("Sokhan-Fulfillment-Project/fulfillment_data.rds")
 # "darkly" to make my app more visually appealing.  The following link was very useful for learning about the 
 # shinythemes package and the themes it offers: https://rstudio.github.io/shinythemes/ 
 ui <- fluidPage(theme = shinytheme("darkly"),
-                
+              
                 # Application title.  In the line below, I named my application.  I started my analysis with November 2017, 
                 # which is when I first took over as the Web Fulfillment Manager.  I ended it with October 2018 because 
                 # it was the last month that I was fully in charge of the Web Fulfillment Team. Starting with November 2018,
@@ -134,7 +134,44 @@ ui <- fluidPage(theme = shinytheme("darkly"),
                                       h6("The X-Axis is the month of web fulfillment in YYYY-MM format.  It starts with
                                          November 2017, when I first took over as the manager."),
                                       tags$b("Y-Axis:"),
-                                      h6("The Y-Axis is the total sales for all countries in U.S. Dollars.")))
+                                      h6("The Y-Axis is the total sales for all countries in U.S. Dollars."))),
+                           
+                           #Below, I created my summary tab.
+                           tabPanel("Summary",
+                                    
+                                    mainPanel(
+                                      h2("Summary"),
+                                      h5("In general, the months with the most orders and most sales are December, November, and 
+                                         August.  December sales are the highest because we run promotions and sales for the 
+                                         holiday season and early action results come out this month.  November is the second 
+                                         largest month in sales because of the Black Friday and Cyber Monday promotions, which offer
+                                         our largest discounts of the year.  August is the third largest month in sales likely due to
+                                         the start of our Hillflint Sweater campaign and students purchasing apparel before the 
+                                         semester begins."),
+                                      h2("Interesting Findings"),
+                                      h5("1) The vast majority of our online orders are placed in the United States.  Most of the countries
+                                         on the list average less than 10 orders per month."),
+                                      h5("2) Majority English speaking countries, such as Canada and Australia, are the most frequent international customers."),
+                                      h5("3) In June 2018, the average order value from Australia was almost $350.  There were 6 orders
+                                         placed that month."),
+                                      h5("4) In the United States, the average order value peaked in February and March, but these two
+                                         months had a lower total number of orders than the average.  In busy months, such as December
+                                         and August, the average order value is less than that of February and March, which are not
+                                         as busy."),
+                                      h5("5) November is not a great month to have Web Fulfillment Managers take over.  November and 
+                                         December are the months with the highest sales, so it would make much more sense to have 
+                                         the experienced manager in charge of this month instead of the new successor. An alternate
+                                         solution is to hire earlier and have the new manager run the month of October with the old
+                                         manager's help.  That way, the incoming manager can get used to the operational and logistical
+                                         processes of a month that is more typical and be more adequately prepared to handle the 
+                                         challenging months of November and December."),
+                                      h5("6) Regular Decision results come out at the end of March and affect sales in a interesting 
+                                         way.  To investigate the effect of regular decision results on sales, we must look at the sales
+                                         of April, not March, since admission results usually come out on the last or second to last
+                                         day of March.  In the United States, the number of orders for April was below average, but 
+                                         the average order value is the third highest of any month.  Thus, we cannot conclude that 
+                                         regular decision results drive sales up significantly, but we can conclude that regular
+                                         decision results may be a factor in driving up the average order value in April.")))
                            
                            ))
 
